@@ -1,0 +1,19 @@
+.d-flex.min-vh-100{
+    background: url('/static/user_background.png') center / cover no-repeat;
+    background-color: #444;
+    background-blend-mode: overlay;
+}
+
+.vh-100.bg-image, .vh-200.bg-image{
+    background-image: url('/static/user_background.png');
+}
+
+.card{
+    border-radius: 15px
+}
+
+.card-img-top{
+    height: 225px; 
+    width: 100%; 
+    display: block
+}

@@ -1,0 +1,79 @@
+{% extends 'order_navigation.html' %} {% block content %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">{{vendor}}'s Menu</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul class="flashes">
+      {% for category, message in messages %} {% if category == 'error' %}
+      <div class="alert alert-danger" role="alert">{{message}}</div>
+      {% endif %} {% if category == 'success' %}
+      <div class="alert alert-success" role="alert">{{message}}</div>
+      {% endif %} {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <br />
+    {% if not vendor_menu %}
+    <div class="alert alert-info" role="alert">No Menu Items</div>
+    {% endif %}
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          {% for food in vendor_menu %}
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img
+                class="card-img-top"
+                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                alt="Thumbnail [100%x225]"
+                src="{{url_for('static', filename=vendor_menu[food][2])}}"
+                data-holder-rendered="true"
+              />
+              <div class="card-body">
+                <h3 class="card-text">{{food}}</h3>
+                <h5 class="card-text">{{vendor_menu[food][1]}}</h5>
+                <p class="card-text">${{vendor_menu[food][0]}}</p>
+                <form action="/api/add-order" method="POST">
+                  <input
+                    type="hidden"
+                    name="item-price"
+                    value="{{vendor_menu[food][0]}}"
+                  />
+                  <input type="hidden" name="food-item-name" value="{{food}}" />
+                  <input
+                    type="hidden"
+                    name="food-item"
+                    value="{{vendor_menu[food][3]}}"
+                  />
+                  <input
+                    type="text"
+                    name="special-request"
+                    value="None"
+                    class="form-control form-control-lg"
+                  />
+                  <label for="special-request" class="form-label"
+                    >Special requests:</label
+                  >
+                  <input
+                    type="number"
+                    name="qty"
+                    value="1"
+                    min="1"
+                    class="form-control form-control-lg"
+                  />
+                  <label for="number" class="form-label">Quantity:</label>
+                  <br />
+                  <button type="submit" class="btn btn-primary" name="add">
+                    Add Order
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

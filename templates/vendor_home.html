@@ -1,0 +1,48 @@
+{% extends 'vendor_navigation.html' %} {% block content %} {% with messages =
+get_flashed_messages(with_categories=true) %} {% if messages %}
+<ul class="flashes">
+  {% for category, message in messages %} {% if category == 'error' %}
+  <div class="alert alert-danger" role="alert">{{message}}</div>
+  {% endif %} {% if category == 'success' %}
+  <div class="alert alert-success" role="alert">{{message}}</div>
+  {% endif %} {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+<div
+  class="d-flex min-vh-100"
+  lc-helper="background"
+>
+  <div class="align-self-center text-center text-light col-md-8 offset-md-2">
+    <div class="lc-block mb-4">
+      <div editable="rich">
+        {% if user %}
+        <h1 class="display-1 fw-bolder">What's cooking, {{user}}?</h1>
+        {% else %}
+        <h1 class="display-1 fw-bolder">"Let him cook.🔥"</h1>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="lc-block">
+      <div editable="rich">
+        <p class="lead">Welcome to UTSC'S Premier Vendor Management System.</p>
+
+        <p class="lead">Update your menu and manage your orders here.</p>
+        {% if user %}
+        <a href="{{url_for('manage_menu')}}">
+          <button type="button" class="btn btn-primary btn-lg">
+            Menu Management
+          </button>
+        </a>
+        {% else %}
+        <a href="{{url_for('vendor_login')}}">
+          <button type="button" class="btn btn-primary btn-lg">
+            Vendor Login
+          </button>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

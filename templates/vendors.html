@@ -1,0 +1,41 @@
+{% extends 'navigation.html' %} {% block content %}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      {% for vendor in vendor_info %}
+      <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+          <img
+            class="card-img-top"
+            data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+            alt="Thumbnail [100%x225]"
+            style="height: 225px; width: 100%; display: block"
+            {% if vendor_info[vendor][1] %}
+            src="{{url_for('static',
+          filename=vendor_info[vendor][1])}}"
+            {% else %}
+            src="{{url_for('static', filename='default_vendor.png')}}"
+            {% endif %}
+            data-holder-rendered="true"
+          />
+          <div class="card-body">
+            <h5 class="card-text">{{vendor_info[vendor][-1]}}</h5>
+            <p class="card-text">{{vendor_info[vendor][0]}}</p>
+            <form action="/api/vendor-order" method="POST">
+              <input
+                type="hidden"
+                name="vendor"
+                value="{{vendor_info[vendor][-1]}}"
+              />
+              <button type="submit" class="btn btn-primary" name="delete">
+                Order Here
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

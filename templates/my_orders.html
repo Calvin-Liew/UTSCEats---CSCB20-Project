@@ -1,0 +1,48 @@
+{% extends 'navigation.html' %} {% block content %}
+<section class="jumbotron text-center">
+  <h1 class="jumbotron-heading">{{vendor}} Orders</h1>
+  <br />
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flashes">
+      {% for category, message in messages %} {% if category ==
+      'error' %}
+      <div class="alert alert-danger" role="alert">{{message}}</div>
+      {% endif %} {% if category == 'success' %}
+      <div class="alert alert-success" role="alert">
+        {{message}}
+      </div>
+      {% endif %} {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+  {% if orders_info %}
+  {% for orders in orders_info %}
+  <div class="list-group">
+    <form
+      class="list-group-item list-group-item-action flex-column align-items-start"
+      method="POST"
+      action="/api/my-orders-detailed"
+    >
+      <h5 class="mb-1">Order ID: {{orders}}</h5>
+      <p class="mb-1">Vendor: {{orders_info[orders][0]}}</p>
+      <p class="mb-1">Total Amount: ${{orders_info[orders][2]}}</p>
+      <p class="mb-1">Time of Order: {{orders_info[orders][3]}}</p>
+      <p class="mb-1">Order Completion Date: {{orders_info[orders][4]}}</p>
+      <p class="mb-1">Status:<p class="text-primary">{{orders_info[orders][1]}}</p>
+      <input type="hidden" value="{{orders}}" name="order_id" />
+      <button
+        type="submit"
+        class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
+      >
+        View Order
+      </button>
+    </form>
+    <br />
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="alert alert-warning" role="alert">No orders</div>
+  {% endif %}
+  <br />
+</section>
+{% endblock %}

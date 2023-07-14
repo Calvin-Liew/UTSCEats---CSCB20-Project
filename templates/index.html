@@ -1,0 +1,41 @@
+{% extends 'navigation.html' %} {% block content %}
+{% with messages =
+  get_flashed_messages(with_categories=true) %} {% if messages %}
+  <ul class="flashes">
+    {% for category, message in messages %} {% if category == 'error' %}
+    <div class="alert alert-danger" role="alert">{{message}}</div>
+    {% endif %} {% if category == 'success' %}
+    <div class="alert alert-success" role="alert">{{message}}</div>
+    {% endif %} {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+<div
+  class="d-flex min-vh-100"
+  lc-helper="background"
+>
+  <div class="align-self-center text-center text-light col-md-8 offset-md-2">
+    <div class="lc-block mb-4">
+      <div editable="rich">
+        {% if user %}
+        <h1 class="display-1 fw-bolder">Welcome back {{user}}!</h1>
+        <p class="lead">Order food here!</p>
+        <a href="{{url_for('vendors')}}">
+          <button type="button" class="btn btn-primary btn-lg">
+            Order Here
+          </button>
+        </a>
+        {% else %}
+        <h1 class="display-1 fw-bolder">Time to eat?</h1>
+        <p class="lead">Order food here!</p>
+        <a href="{{url_for('register')}}">
+          <button type="button" class="btn btn-primary btn-lg">Register</button>
+        </a>
+        <a href="{{url_for('login')}}">
+          <button type="button" class="btn btn-secondary btn-lg">Login</button>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'order_navigation.html' %} {% block content %}
+<section class="jumbotron text-center">
+  <h1 class="jumbotron-heading">Your {{vendor}}'s Order</h1>
+  <br />
+  {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <ul class="flashes">
+                  {% for category, message in messages %} {% if category ==
+                  'error' %}
+                  <div class="alert alert-danger" role="alert">{{message}}</div>
+                  {% endif %} {% if category == 'success' %}
+                  <div class="alert alert-success" role="alert">
+                    {{message}}
+                  </div>
+                  {% endif %} {% endfor %}
+                </ul>
+                {% endif %} {% endwith %}
+  {% if orders %}
+  {% for order in orders %}
+  <div class="list-group">
+    <div
+      class="list-group-item list-group-item-action flex-column align-items-start"
+    >
+      <h5 class="mb-1">{{orders[order][1]}}</h5>
+      <br />
+      <form
+        method="POST"
+        action="/api/edit-order"
+        enctype="multipart/form-data"
+      >
+        <input type="hidden" name="order_id" value="{{order}}" />
+        <input type="hidden" name="price" value="{{orders[order][-1]}}" />
+        <p>Item {{order}}</p>
+        <div class="form-outline mb-4">
+          <input
+            type="number"
+            min="1"
+            id="form3Example1cg"
+            class="form-control form-control-lg"
+            name="qty"
+            value="{{orders[order][2]}}"
+            required
+          />
+          <label class="form-label" for="form3Example1cg">Quantity:</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input
+            type="text"
+            id="form3Example1cg"
+            class="form-control form-control-lg"
+            name="special-requests"
+            value="{{orders[order][3]}}"
+            required
+          />
+          <label class="form-label" for="form3Example1cg"
+            >Special Requests:</label
+          >
+        </div>
+        <button
+          type="submit"
+          class="btn btn-warning btn-block btn-lg gradient-custom-4 text-body"
+        >
+          Update
+        </button>
+      </form>
+    </div>
+    <br />
+    {% endfor %}
+    <h1 class="jumbotron-heading">Total: ${{amount}}</h1>
+  </div>
+  <form action="/api/confirm-order" method="POST">
+    <br />
+    <button
+      type="submit"
+      class="btn btn-primary btn-block btn-lg gradient-custom-4 text-body"
+    >
+      <input type="hidden" value="{{amount}}" name="total_amount" />
+      Pay
+    </button>
+  </form>
+  {% else %}
+  <div class="alert alert-warning" role="alert">No items in cart</div>
+  {% endif %}
+  <br />
+</section>
+{% endblock %}

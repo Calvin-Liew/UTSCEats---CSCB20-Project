@@ -1,0 +1,105 @@
+Student name and number: Calvin Liew, 1008801129
+
+Description of site: 
+I don't like waiting in lines at Tims at UTSC and
+honestly if all the vendors at UTSC have online ordering 
+and pick up it would be easy and convenient so 
+I created UTSCEats. 
+
+UTSCEats has two portals, one for the customer and
+one for the vendor. 
+
+Both of them have a login and register sites.
+
+Customer side:
+Onced logged in they are able to order from 'order here' tab, view current orders 
+from 'view orders' tab and past orders from 'past orders' tab.
+
+Once in 'orders here'. List of vendors should show up.
+User clicks on one vendor that they would like to order from. 
+
+Then they can order whatever food item they want in the 
+menu tab of the ordering phase,
+give the quantity and special requests if needed. 
+
+At the order phase, the user can also access 'my cart'
+to see their potential orders before confirming. 
+
+If the user at any point clicks on 'exit ordering',
+the cart will become empty and will be sent back
+to home. 
+
+Once the user 'pays' (by clicking on the pay button),
+the user will be sent back to the customer 
+portal and is able to look at their current orders.
+They will see the latest order with all the important
+details.
+
+Customers can click on any order they want to see 
+important details of a specific order and most
+importantly the status of the order, 
+whether it is ordered, processing, ready to pick up.
+
+Once the status switches to 'ready to pick up',
+hypothecially, the user will go the vendor
+and pick up the food and the vendor will then
+upgrade the status to 'order fulfilled'.
+
+Vendor side:
+On the vendor side, once logged in, they 
+are able to multiple things:
+
+Edit vendor information:
+Vendors are able to edit their address,
+building and provide an image of their 
+establishment (the image is the generic one
+when they register). 
+
+Manage menu:
+Vendors are able to add menu items, edit menu items and delete menu items. 
+They are able to change the images of the items. If they don't provide
+an image, there will be a generic one. 
+They are able to edit the price, decription, name of the item. 
+
+View current oders:
+Once the customer sends a order, it will show up here. 
+Vendors will see all of their orders. If they want
+to see a specific order, they can click on it. 
+They can see the items that the user ordered.
+They can also update the status of the order. 
+Once they click on the menu, it is assumed
+that they will start working on it so the status
+switches to 'processing'. When the vendor is finished
+the item, they can click on the button to 
+change the status to 'ready to pick up'. Once the 
+customer arrives, the vendor can change the status 
+once more to 'fulfilled'. Then the order is considered
+to be finished and is only seen in the 'order records'. For the
+user, it will be in the 'past orders'.
+
+Data that is already in the database:
+The zip folder should contain the database with some information already.
+
+There is one user acconunt:
+email: calvin@gmail.com
+password: 123
+
+With this account you can see some current order that I have made 
+from 'Villian Burger' and one past order from 'Moonbucks'.
+
+Here's two vendor accounts:
+vendor name: villian burger
+password: 123
+
+vendor name: moonbucks
+password: 123
+
+In these two accounts, you can see their current and 
+past orders, menu items and edit them, vendor information etc. 
+
+Thats it! Thanks for viewing my project! 
+
+
+
+
+

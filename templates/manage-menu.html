@@ -1,0 +1,100 @@
+{% extends 'vendor_navigation.html' %} {% block content %} {% if user %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">{{user}}'s Menu</h1>
+    <p class="lead text-muted">Add an item to your menu</p>
+    <p>
+      <a href="{{url_for('add_menu')}}" class="btn btn-primary my-2"
+        >Add Menu Item</a
+      >
+    </p>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <ul class="flashes">
+      {% for category, message in messages %} {% if category == 'error' %}
+      <div class="alert alert-danger" role="alert">{{message}}</div>
+      {% endif %} {% if category == 'success' %}
+      <div class="alert alert-success" role="alert">{{message}}</div>
+      {% endif %} {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+    <br />
+    {% if not foods %}
+    <div class="alert alert-info" role="alert">
+      You have no items in your menu!
+    </div>
+    {% endif %}
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          {% for food in foods %}
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+              <img
+                class="card-img-top"
+                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+                alt="Thumbnail [100%x225]"
+                src="{{url_for('static', filename=foods[food][-1])}}"
+                data-holder-rendered="true"
+              />
+              <div class="card-body">
+                <h3 class="card-text">{{foods[food][1]}}</h3>
+                <p class="card-text">{{foods[food][2]}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <form action="/vendor/edit-item" method="POST">
+                    <input
+                      type="hidden"
+                      name="food-id"
+                      value="{{foods[food][0]}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="food-name"
+                      value="{{foods[food][1]}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="food-price"
+                      value="{{foods[food][3]}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="food-desc"
+                      value="{{foods[food][2]}}"
+                    />
+                    <input
+                      type="hidden"
+                      name="food-image"
+                      value="{{foods[food][-1]}}"
+                    />
+                    <button type="submit" class="btn btn-primary" name="delete">
+                      Edit
+                    </button>
+                  </form>
+                  <form action="/vendor/api/delete-item" method="POST">
+                    <input
+                      type="hidden"
+                      name="food-item"
+                      value="{{foods[food][0]}}"
+                    />
+                    <button type="submit" class="btn btn-danger" name="delete">
+                      Delete
+                    </button>
+                  </form>
+                  <h5 class="text-primary">${{foods[food][3]}}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% else %}
+<div class="alert alert-warning" role="alert">
+  You are not signed as a vendor. Please sign in
+  <a href="{{url_for('vendor_login')}}">here.</a>
+</div>
+{% endif %} {% endblock%}
