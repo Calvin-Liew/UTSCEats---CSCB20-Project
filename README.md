@@ -1,6 +1,6 @@
 # CSCB20 Web App
 
-Welcome to the UTSCEats Web App repository! This CSCB20 project showcases an intuitive and efficient Minimal Viable Product (MVP) of a web application designed specifically for students. 
+Welcome to the UTSCEats Web App repository! This CSCB20 project showcases an intuitive and efficient Minimal Viable Product (MVP) of a web application designed specifically for students at the University of Toronto Scarborough. 
 
 ## Features
 
