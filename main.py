@@ -664,4 +664,4 @@ def complete_order():
     return redirect(url_for('detailed_order'))
   
 
-app.run(host='0.0.0.0', port=5000, debug=True)
+app.run(debug=True, port=os.getenv("PORT", default=5000))
